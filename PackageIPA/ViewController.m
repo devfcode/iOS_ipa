@@ -31,7 +31,6 @@ static NSString *ipa_in_sandbox = @"ipa_sandbox";
     
     // 在子进程中启动服务器
     [self performSelectorInBackground:@selector(start_server) withObject:nil];
-//    [self start_server];
 }
 
 // 把项目中的 ipa 文件放到沙盒中去
@@ -71,16 +70,15 @@ static NSString *ipa_in_sandbox = @"ipa_sandbox";
     //    NSLog(@"docDir:\n%@",docDir);
     NSString *path = [NSString stringWithFormat:@"%@/test.ipa", docDir];
     if ([fileManager fileExistsAtPath:path]) {
-        NSLog(@"%@ is exist", path);
         const char *path2 = [path UTF8String];
-        printf("%s\n",path2);
-//        while (1) {
-            server_start(path2);
-//        }
+        //        printf("%s\n",path2);
+        //        while (1) {
+        server_start(path2);
+        //        }
     }else {
         NSLog(@"%@ is not exist", path);
-//        [self copy_ipa_to_sandbox];
-//        [self start_server];
+        //        [self copy_ipa_to_sandbox];
+        //        [self start_server];
     }
 }
 
@@ -97,8 +95,17 @@ static NSString *ipa_in_sandbox = @"ipa_sandbox";
     }];
 }
 
-- (IBAction)offline_install_act:(UIButton *)sender {
-    
+- (IBAction)test_act:(UIButton *)sender {
+    //    NSString *scheme = @"itms-services://?action=download-manifest&url=https://google.hahaya.top:9000/download/manifest.plist";
+    //    NSURL *url = [NSURL URLWithString:scheme];
+    //    UIApplication *application = [UIApplication sharedApplication];
+    //    [application openURL:url options:@{} completionHandler:^(BOOL success) {
+    //        if(success){
+    //            NSLog(@"open %@",scheme);
+    //        }else {
+    //            NSLog(@"open fail");
+    //        }
+    //    }];
 }
 
 @end

@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 
-#define PORT 9001
+#define PORT 9000
 int listen_max = 20; // 最大并发数量
 
 const char *file_path = NULL;
@@ -124,7 +124,8 @@ int server_start(const char *path)
         {
             fprintf(stderr, "%s:%d error: %s\n", __FILE__, __LINE__, strerror(errno));
             close(sock_client);
-            break;
+            //            break;
+            goto over_pro;
         }
         memset(buff, '\0', sizeof(buff));
         unsigned long len = recv(sock_client, buff, sizeof(buff), 0);
@@ -133,14 +134,15 @@ int server_start(const char *path)
         {
             fprintf(stderr, "%s:%d error: %s\n", __FILE__, __LINE__, strerror(errno));
             close(sock_client);
-            break;
+            //            break;
+            goto over_pro;
         }
         
         http_response(sock_client, buff, len);
         close(sock_client);
     }
     
+over_pro:
     close(sockfd);
-    
     return 0;
 }
